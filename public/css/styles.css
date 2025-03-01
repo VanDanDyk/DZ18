@@ -1,0 +1,13 @@
+* {
+	font-family: 'Cascadia Code';
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	background: #000;
+	color: #fff;
+}
