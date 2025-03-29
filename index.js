@@ -26,20 +26,6 @@ app.use(
 	})
 )
 
-// роутинг
-app.get('/', (req, res) => {
-	res.sendFile(getPath(`index`))
-})
-app.get('/about', (req, res) => {
-	res.sendFile(getPath(`about`))
-})
-app.get('/data', (req, res) => {
-	res.json({ message: 'Это json-ответ от сервера' })
-})
-app.get('/home', (req, res) => {
-	res.redirect('/')
-})
-
 // параметрический роут
 app.get('/user-info/:id', (req, res) => {
 	const userId = parseInt(req.params.id)
@@ -74,6 +60,7 @@ app.get('/search', (req, res) => {
 //! Работа с пользователями
 app.get('/getUsers', (req, res) => {
 	try {
+		console.log('jopa')
 		const users = fs.readFileSync(path.join(__dirname, 'db', 'db.json'), 'utf-8')
 		res.json(users)
 	} catch (error) {
