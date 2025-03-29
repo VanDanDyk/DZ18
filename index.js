@@ -18,11 +18,9 @@ app.use(morgan(':method :url :status'))
 app.use(express.json())
 
 // cors
-const allowedOrigins = ['https://dz18-client.onrender.com/']
 app.use(
 	cors({
 		methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-		origin: allowedOrigins
 	})
 )
 
