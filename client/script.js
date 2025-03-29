@@ -6,7 +6,7 @@ const postUserBtn = document.querySelector('.addUserBtn')
 const UserList = document.querySelector(".list")
 const SearchInput = document.querySelector(".searchBlock input")
 
-const URL = ''
+const URL = 'https://dz18-client.onrender.com'
 const getDataFunction = async url => {
 	const getData = async url => {
 		const res = await fetch(url)
