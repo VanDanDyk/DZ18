@@ -6,6 +6,7 @@ const postUserBtn = document.querySelector('.addUserBtn')
 const UserList = document.querySelector(".list")
 const SearchInput = document.querySelector(".searchBlock input")
 
+const URL = ''
 const getDataFunction = async url => {
 	const getData = async url => {
 		const res = await fetch(url)
@@ -68,7 +69,7 @@ const DeleteDataFunction = async (url, id) => {
 }
 
 document.addEventListener("DOMContentLoaded",async () => {
-	let data = JSON.parse(await getDataFunction('http://localhost:3000/getUsers'))
+	let data = JSON.parse(await getDataFunction(`${URL}/getUsers`))
 	data.forEach(user => {
 		console.log(user)
 		UserList.insertAdjacentHTML(
@@ -83,25 +84,25 @@ document.addEventListener("DOMContentLoaded",async () => {
 		let listElement = document.querySelector('ul').lastChild
 		listElement.querySelector('.deleteBtn').addEventListener('click', async () => {
 			listElement.remove()
-			await DeleteDataFunction('http://localhost:3000/delUser', user.id)
+			await DeleteDataFunction(`${URL}/delUser`, user.id)
 		})
 	})
 })
 
 postUserBtn.addEventListener('click', async () => {
-	let data = JSON.parse(await getDataFunction('http://localhost:3000/getUsers')).map(el => el = el.id)
+	let data = JSON.parse(await getDataFunction(`${URL}/getUsers`)).map(el => el = el.id)
 	if(InputName.value.length == 0 || InputAge.value.length == 0 || InputCity.value.length == 0 || isNaN(InputAge.value)){
 		alert('Вы не ввели одно из полей для загрузки пользователя или ввели неправильно')
 	}
 	else{
 	let userObj = {id : Math.max(...data)+1, name : InputName.value, age: Number(InputAge.value), city: InputCity.value}
-	console.log(await postDataFunction('http://localhost:3000/addUser', userObj))	
+	console.log(await postDataFunction(`${URL}/addUser`, userObj))	
 	}
 })
 
 SearchInput.addEventListener("keypress",async (e) => {
 	if(e.code == "Enter"){
-		let data = JSON.parse(await getDataFunction(`http://localhost:3000/search?query=${SearchInput.value}`))
+		let data = JSON.parse(await getDataFunction(`${URL}/search?query=${SearchInput.value}`))
 		console.log(data)
 		UserList.innerHTML = ""
 		data.forEach(user => {
@@ -119,7 +120,7 @@ SearchInput.addEventListener("keypress",async (e) => {
 		let listElement = document.querySelector('ul').lastChild
 		listElement.querySelector('.deleteBtn').addEventListener('click', async () => {
 			listElement.remove()
-			await DeleteDataFunction('http://localhost:3000/delUser', user.id)
+			await DeleteDataFunction(`${URL}/delUser`, user.id)
 		})
 	}
 })
